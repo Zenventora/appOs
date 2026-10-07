@@ -1,0 +1,18 @@
+{
+  "name": "@puravigal/app-os",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Puravigal App OS - reusable product platform",
+  "packageManager": "pnpm@10.0.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}
