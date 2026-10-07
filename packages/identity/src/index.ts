@@ -1,3 +1,4 @@
 export * from "./types.js";
 export * from "./service.js";
 export * from "./in-memory.js";
+export * from "./authorization.js";
