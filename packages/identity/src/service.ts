@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import type { OrganizationId, TenantId, UserId } from "@puravigal/app-os-kernel";
 import type { Identity, Membership, Organization, Permission, Role, User } from "./types.js";
 
@@ -17,6 +18,7 @@ export interface CreateOrganizationInput {
 export interface IdentityRepository {
   saveUser(user: User): Promise<void>;
   getUser(id: UserId): Promise<User | undefined>;
+  findUserByEmail(email: string): Promise<User | undefined>;
   saveIdentity(identity: Identity): Promise<void>;
   findIdentity(provider: Identity["provider"], providerSubject: string): Promise<Identity | undefined>;
   saveOrganization(org: Organization): Promise<void>;
@@ -32,7 +34,7 @@ export class IdentityService {
 
   async createUser(input: CreateUserInput, now = new Date().toISOString()): Promise<User> {
     const user: User = {
-      id: crypto.randomUUID() as UserId,
+      id: randomUUID() as UserId,
       email: input.email?.trim().toLowerCase(),
       phone: input.phone,
       displayName: input.displayName.trim(),
@@ -48,7 +50,7 @@ export class IdentityService {
 
   async createOrganization(input: CreateOrganizationInput, now = new Date().toISOString()): Promise<Organization> {
     const org: Organization = {
-      id: crypto.randomUUID() as OrganizationId,
+      id: randomUUID() as OrganizationId,
       tenantId: input.tenantId,
       name: input.name.trim(),
       slug: input.slug.trim().toLowerCase(),
@@ -58,7 +60,7 @@ export class IdentityService {
     };
     await this.repository.saveOrganization(org);
     await this.repository.saveMembership({
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       tenantId: input.tenantId,
       organizationId: org.id,
       userId: input.ownerUserId,
