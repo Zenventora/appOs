@@ -1,0 +1,11 @@
+{
+  "name": "@puravigal/app-os-query",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "@puravigal/app-os-kernel": "workspace:*",
+    "@puravigal/app-os-data": "workspace:*"
+  },
+  "exports": { ".": "./src/index.ts" }
+}
