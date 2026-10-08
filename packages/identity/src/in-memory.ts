@@ -12,6 +12,7 @@ export class InMemoryIdentityRepository implements IdentityRepository {
 
   async saveUser(user: User) { this.users.set(user.id, user); }
   async getUser(id: UserId) { return this.users.get(id); }
+  async findUserByEmail(email: string) { return [...this.users.values()].find(user => user.email === email); }
   async saveIdentity(identity: Identity) { this.identities.set(identity.id, identity); }
   async findIdentity(provider: Identity["provider"], providerSubject: string) {
     return [...this.identities.values()].find(x => x.provider === provider && x.providerSubject === providerSubject);
